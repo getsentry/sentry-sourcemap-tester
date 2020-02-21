@@ -6,6 +6,13 @@
   </head>
   <!-- add sentry javascript here -->
   <body>
+    <script
+    src="https://browser.sentry-cdn.com/5.12.1/bundle.min.js"
+    integrity="sha384-y+an4eARFKvjzOivf/Z7JtMJhaN6b+lLQ5oFbBbUwZNNVir39cYtkjW1r6Xjbxg3"
+    crossorigin="anonymous"></script>
+    <script>
+    Sentry.init({ dsn: 'https://abcdef@127.0.0.1/1' });
+    </script>
     <button data-uri="add.js">unminified</button>
     <button data-uri="build/nodirective/add.min.js">nodirective</button>
     <button data-uri="build/missing/add.min.js">bad url</button>
