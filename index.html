@@ -10,13 +10,11 @@
     src="https://browser.sentry-cdn.com/5.12.1/bundle.min.js"
     integrity="sha384-y+an4eARFKvjzOivf/Z7JtMJhaN6b+lLQ5oFbBbUwZNNVir39cYtkjW1r6Xjbxg3"
     crossorigin="anonymous"></script>
-    <script>
-    const SENTRY_DSN = 'https://abcdef@127.0.0.1/1';
-    Sentry.init({ dsn: SENTRY_DSN });
-    </script>
     <h1>Source map tester</h1>
 
-    <p>Using Sentry DSN: <input name="sentry-dsn" value="" style="width:500px"/></p>
+    <form id="sentry-enable">
+    <p>Using Sentry DSN: <input id="sentry-dsn" value="https://abcdef@127.0.0.1/1" style="width:500px"/> <button type="submit">Enable</button></p>
+</form>
 
     <h4>Trigger an error (see developer console)</h4>
     <ul>
@@ -29,9 +27,21 @@
 
     <script>
     (function() {
-        document.getElementsByName('sentry-dsn')[0].value = SENTRY_DSN;
+        
+        const form = document.getElementById('sentry-enable');
+        form.addEventListener('submit', function (evt) {
+            evt.preventDefault();
 
-        const buttons = document.querySelectorAll('button');
+            const input = document.getElementById('sentry-dsn');
+            const dsn = input.value;
+            Sentry.init({ dsn: dsn });
+
+            input.setAttribute('disabled', 'disabled');
+            form.getElementsByTagName('button')[0].setAttribute('disabled', 'disabled');
+            return false;
+        });
+
+        const buttons = document.querySelectorAll('ul button');
         buttons.forEach((button) => {
             button.addEventListener('click', function () {
                 const elem = this;
