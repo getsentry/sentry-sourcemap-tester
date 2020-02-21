@@ -11,16 +11,26 @@
     integrity="sha384-y+an4eARFKvjzOivf/Z7JtMJhaN6b+lLQ5oFbBbUwZNNVir39cYtkjW1r6Xjbxg3"
     crossorigin="anonymous"></script>
     <script>
-    Sentry.init({ dsn: 'https://abcdef@127.0.0.1/1' });
+    const SENTRY_DSN = 'https://abcdef@127.0.0.1/1';
+    Sentry.init({ dsn: SENTRY_DSN });
     </script>
-    <button data-uri="add.js">unminified</button>
-    <button data-uri="build/nodirective/add.min.js">nodirective</button>
-    <button data-uri="build/missing/add.min.js">bad url</button>
-    <button data-uri="build/noSources/add.min.js">no sources</button>
-    <button data-uri="build/includeSources/add.min.js">include sources</button>
+    <h1>Source map tester</h1>
+
+    <p>Using Sentry DSN: <input name="sentry-dsn" value="" style="width:500px"/></p>
+    
+    <h4>Trigger an error (see developer console)</h4>
+    <ul>
+        <li><button data-uri="add.js">unminified</button> &mdash; unminified</li>
+        <li><button data-uri="build/nodirective/add.min.js">nodirective</button> &mdash; minified but contains no <code>sourceMappingURL</code> directive</li>
+        <li><button data-uri="build/missing/add.min.js">bad url</button> &mdash; minified, but has an incorrect <code>sourceMappingURL</code> directive</li>
+        <li><button data-uri="build/noSources/add.min.js">no sources</button> &mdash; minified, points to a correct source map, but source information is absent (<strong>no</strong> source context)</li>
+        <li><button data-uri="build/includeSources/add.min.js">include sources</button> &mdash; minified, points to a correct source map, and source information is present (source context)</li>
+    </ul>
 
     <script>
     (function() {
+        document.getElementsByName('sentry-dsn')[0].value = SENTRY_DSN;
+
         const buttons = document.querySelectorAll('button');
         buttons.forEach((button) => {
             button.addEventListener('click', function () {
