@@ -17,12 +17,12 @@
     <h1>Source map tester</h1>
 
     <p>Using Sentry DSN: <input name="sentry-dsn" value="" style="width:500px"/></p>
-    
+
     <h4>Trigger an error (see developer console)</h4>
     <ul>
         <li><button data-uri="add.js">unminified</button> &mdash; unminified</li>
-        <li><button data-uri="build/nodirective/add.min.js">nodirective</button> &mdash; minified but contains no <code>sourceMappingURL</code> directive</li>
-        <li><button data-uri="build/missing/add.min.js">bad url</button> &mdash; minified, but has an incorrect <code>sourceMappingURL</code> directive</li>
+        <li><button data-uri="build/nodirective/add.min.js">no directive</button> &mdash; minified but contains no <code>sourceMappingURL</code> directive</li>
+        <li><button data-uri="build/missing/add.min.js">bad directive</button> &mdash; minified, but has an incorrect <code>sourceMappingURL</code> directive</li>
         <li><button data-uri="build/noSources/add.min.js">no sources</button> &mdash; minified, points to a correct source map, but source information is absent (<strong>no</strong> source context)</li>
         <li><button data-uri="build/includeSources/add.min.js">include sources</button> &mdash; minified, points to a correct source map, and source information is present (source context)</li>
     </ul>
