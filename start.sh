@@ -2,10 +2,9 @@
 
 # How to use this ...
 #
-# 1. Install npm
-#    $ npm install -g uglify-js
-# 2. Run this script
-#    sh ./generate.sh
+# 1. Run this script
+#    sh ./start.sh
+# 2. Visit website: http://127.0.0.1:4004
 
 BUILD_DIR=build
 OUTFILE=add.min.js
@@ -32,5 +31,5 @@ $UGLIFY_BIN add.js --source-map url=${OUTMAP} -o ${BUILD_DIR}/noSources/${OUTFIL
 mkdir -p ${BUILD_DIR}/includeSources
 $UGLIFY_BIN add.js --source-map url=${OUTMAP},includeSources -o ${BUILD_DIR}/includeSources/${OUTFILE}
 
-echo "Starting webserver at http://127.0.0.1:8000"
-python -m SimpleHTTPServer
+echo "Starting webserver at http://127.0.0.1:4004"
+python -m SimpleHTTPServer 4004
