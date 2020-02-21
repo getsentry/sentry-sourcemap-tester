@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>title</title>
+  </head>
+  <!-- add sentry javascript here -->
+  <body>
+    <button data-uri="add.js">unminified</button>
+    <button data-uri="build/nodirective/add.min.js">nodirective</button>
+    <button data-uri="build/missing/add.min.js">bad url</button>
+    <button data-uri="build/noSources/add.min.js">no sources</button>
+    <button data-uri="build/includeSources/add.min.js">include sources</button>
+
+    <script>
+    (function() {
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach((button) => {
+            button.addEventListener('click', function () {
+                const elem = this;
+                const script = document.createElement('script');
+                script.src = elem.getAttribute('data-uri')
+                document.body.appendChild(script);
+            });
+        })
+    })();
+    </script>
+  </body>
+</html>
